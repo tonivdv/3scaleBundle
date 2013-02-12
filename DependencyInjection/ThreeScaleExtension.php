@@ -14,29 +14,31 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
-class ThreeScaleExtension extends Extension {
+class ThreeScaleExtension extends Extension
+{
+    /**
+     * Loads a specific configuration.
+     */
+    public function load(array $configs, ContainerBuilder $container)
+    {
+        $processor = new Processor();
+        $configuration = new Configuration($container->getParameter('kernel.debug'));
+        $config = $processor->processConfiguration($configuration, $configs);
 
-  /**
-   * Loads a specific configuration.
-   */
-  public function load(array $configs, ContainerBuilder $container) {
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('3scale.xml');
 
-    $processor = new Processor();
-    $configuration = new Configuration($container->getParameter('kernel.debug'));
-    $config = $processor->processConfiguration($configuration, $configs);
+        if (isset($config['client']['class'])) {
+            $container->setParameter($this->getAlias() . '.client.class', $config['client']['class']);
+        }
 
+        $container
+          ->getDefinition('three_scale.client')
+          ->replaceArgument(0, $config['provider_key']);
+    }
 
-    $loader = new XmlFileLoader(
-      $container,
-      new FileLocator(__DIR__.'/../Resources/config')
-    );
-    $loader->load('3scale.xml');
-
-    $container->getDefinition('3scale.client')->replaceArgument(0, $config['provider_key']);
-  }
-
-  public function getAlias() {
-    return 'three_scale';
-  }
-
+    public function getAlias()
+    {
+        return 'three_scale';
+    }
 }

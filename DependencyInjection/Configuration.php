@@ -11,23 +11,27 @@ namespace ToniVdv\ThreeScaleBundle\DependencyInjection;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
-class Configuration implements ConfigurationInterface {
+class Configuration implements ConfigurationInterface
+{
+    /**
+     * Generates the configuration tree builder.
+     *
+     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
+     */
+    public function getConfigTreeBuilder()
+    {
+        $tree = new TreeBuilder();
 
-  /**
-   * Generates the configuration tree builder.
-   *
-   * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
-   */
-  public function getConfigTreeBuilder() {
+        $tree->root('three_scale')
+          ->children()
+            ->scalarNode('provider_key')->defaultValue(false)->isRequired()->end()
+            ->arrayNode('client')
+              ->children()
+                ->scalarNode('class')->end()
+              ->end()
+            ->end()
+          ->end();
 
-    $tree = new TreeBuilder();
-
-    $tree->root('three_scale')
-      ->children()
-        ->scalarNode('provider_key')->defaultValue(false)->isRequired()->end()
-      ->end();
-
-    return $tree;
-
-  }
+        return $tree;
+    }
 }

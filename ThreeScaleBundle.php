@@ -11,8 +11,9 @@ namespace ToniVdv\ThreeScaleBundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ThreeScaleBundle extends Bundle {
-
-  public function build(ContainerBuilder $container) {
-  }
+class ThreeScaleBundle extends Bundle
+{
+    public function build(ContainerBuilder $container)
+    {
+    }
 }

@@ -13,31 +13,43 @@ use Symfony\Component\Config\FileLocator;
 use ToniVdv\ThreeScaleBundle\DependencyInjection\ThreeScaleExtension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class ThreeScaleExtensionTest extends \PHPUnit_Framework_TestCase {
+class ThreeScaleExtensionTest extends \PHPUnit_Framework_TestCase
+{
+    public function testClientDefinition()
+    {
+        $container = $this->getContainer('test.yml');
 
-  public function testClientDefinition() {
+        $this->assertTrue($container->has('three_scale.client'));
+        $definition = $container->getDefinition('three_scale.client');
+        $this->assertEquals('a_generated_key', $definition->getArgument(0));
+        $this->assertEquals('%three_scale.client.class%', $definition->getClass());
+        $this->assertEquals('ThreeScaleClient', $container->getParameter('three_scale.client.class'));
+    }
 
-    $container = $this->getContainer('test.yml');
+    public function testDummyClientDefinition()
+    {
+        $container = $this->getContainer('dummy_client.yml');
 
-    $this->assertTrue($container->has('3scale.client'));
-    $definition = $container->getDefinition('3scale.client');
-    $this->assertEquals('a_generated_key', $definition->getArgument(0));
-    $this->assertEquals('%3scale.client.class%', $definition->getClass());
-  }
+        $this->assertTrue($container->has('three_scale.client'));
+        $definition = $container->getDefinition('three_scale.client');
+        $this->assertEquals('a_generated_key', $definition->getArgument(0));
+        $this->assertEquals('%three_scale.client.class%', $definition->getClass());
+        $this->assertEquals('DummyClient', $container->getParameter('three_scale.client.class'));
+    }
 
-  private function getContainer($file, $debug = false) {
+    private function getContainer($file, $debug = false)
+    {
+        $container = new ContainerBuilder(new ParameterBag(array('kernel.debug' => $debug)));
+        $container->registerExtension(new ThreeScaleExtension());
 
-    $container = new ContainerBuilder(new ParameterBag(array('kernel.debug' => $debug)));
-    $container->registerExtension(new ThreeScaleExtension());
+        $locator = new FileLocator(__DIR__ . '/Fixtures');
+        $loader = new YamlFileLoader($container, $locator);
+        $loader->load($file);
 
-    $locator = new FileLocator(__DIR__ . '/Fixtures');
-    $loader = new YamlFileLoader($container, $locator);
-    $loader->load($file);
+        $container->getCompilerPassConfig()->setOptimizationPasses(array());
+        $container->getCompilerPassConfig()->setRemovingPasses(array());
+        $container->compile();
 
-    $container->getCompilerPassConfig()->setOptimizationPasses(array());
-    $container->getCompilerPassConfig()->setRemovingPasses(array());
-    $container->compile();
-
-    return $container;
-  }
+        return $container;
+    }
 }

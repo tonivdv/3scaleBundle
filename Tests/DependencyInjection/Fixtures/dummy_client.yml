@@ -1,0 +1,6 @@
+three_scale:
+
+  provider_key: a_generated_key
+
+  client:
+    class: DummyClient
