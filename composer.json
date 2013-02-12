@@ -21,6 +21,6 @@
   "autoload": {
     "psr-0": { "ToniVdv\\ThreeScaleBundle": "" }
   },
-  "target-dir": "ToniVdv\\3scaleBundle",
+  "target-dir": "ToniVdv\\ThreeScaleBundle",
   "minimum-stability": "dev"
 }
