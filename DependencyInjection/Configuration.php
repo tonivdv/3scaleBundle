@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface {
 
     $tree = new TreeBuilder();
 
-    $tree->root('3scale')
+    $tree->root('three_scale')
       ->children()
         ->scalarNode('provider_key')->defaultValue(false)->isRequired()->end()
       ->end();

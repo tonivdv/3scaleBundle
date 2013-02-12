@@ -36,7 +36,7 @@ class ThreeScaleExtension extends Extension {
   }
 
   public function getAlias() {
-    return '3scale';
+    return 'three_scale';
   }
 
 }
