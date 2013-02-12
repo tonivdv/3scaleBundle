@@ -1,0 +1,26 @@
+{
+  "name": "tonivdv/3scale-bundle",
+  "description": "Integration of the 3scale php library into Symfony2",
+  "keywords": ["symfony2", "3scale", "api"],
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "require": {
+    "php": ">=5.3.0",
+    "symfony/framework-bundle" : "2.1.*",
+    "tdaws/3scale_ws_api_for_php": "dev-master"
+  },
+  "require-dev": {
+    "symfony/yaml": ">=2.0"
+  },
+  "authors": [
+    {
+      "name": "Toni Van de Voorde",
+      "email": "toni.vdv@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": { "ToniVdv\\ThreeScaleBundle": "" }
+  },
+  "target-dir": "ToniVdv\\3scaleBundle",
+  "minimum-stability": "dev"
+}
