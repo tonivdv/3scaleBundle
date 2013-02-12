@@ -1,5 +1,7 @@
 # 3scaleBundle
 
+[![Build Status](https://travis-ci.org/tonivdv/3scaleBundle.png?branch=master)](https://travis-ci.org/tonivdv/3scaleBundle)
+
 Integration of the 3scale php library into Symfony2
 
 ## Documentation
