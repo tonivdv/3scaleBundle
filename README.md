@@ -1,6 +1,6 @@
 # 3scaleBundle
 
-[![Build Status](https://travis-ci.org/tonivdv/3scaleBundle.png?branch=master)](https://travis-ci.org/tonivdv/3scaleBundle)
+[![Build Status](https://travis-ci.org/tonivdv/3scaleBundle.png?branch=master)](https://travis-ci.org/tonivdv/3scaleBundle)[![Total Downloads](https://poser.pugx.org/tonivdv/3scale-bundle/downloads.png)](https://packagist.org/packages/tonivdv/3scale-bundle)[![Latest Stable Version](https://poser.pugx.org/tonivdv/3scale-bundle/v/stable.png)](https://packagist.org/packages/tonivdv/3scale-bundle)
 
 Integration of the 3scale php library into Symfony2
 
