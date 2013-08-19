@@ -10,7 +10,7 @@
     "tdaws/3scale_ws_api_for_php": "dev-master"
   },
   "require-dev": {
-    "symfony/yaml": ">=2.0"
+    "symfony/yaml": "@stable"
   },
   "authors": [
     {
